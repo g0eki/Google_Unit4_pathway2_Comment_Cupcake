@@ -96,8 +96,10 @@ fun CupcakeApp(
     viewModel: OrderViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ) {
+    // toDO: (Rang 1) verstehe dieses "backStackEntry" - Meine Notes:
     // Get current back stack entry
     val backStackEntry by navController.currentBackStackEntryAsState()
+    // toDO: (Rang 1) verstehe dieses "currentScreen" - Meine Notes: Whenn ein Ziel vorhanden gib das zurück, ansonsten Start.name
     // Get the name of the current screen
     val currentScreen = CupcakeScreen.valueOf(
         backStackEntry?.destination?.route ?: CupcakeScreen.Start.name
@@ -107,11 +109,15 @@ fun CupcakeApp(
         topBar = {
             CupcakeAppBar(
                 currentScreen = currentScreen,
+                // toDO: (Rang 1) verstehe dieses "previousBackStackEntry" - Meine Notes:
+                // NOTE: Doku: previousBackStackEntry - Return: den letzten sichtbaren Eintrag auf dem hinteren Stapel oder null, wenn der hintere Stapel weniger als zwei sichtbare Einträge hat
                 canNavigateBack = navController.previousBackStackEntry != null,
+                // toDO: (Rang 1) verstehe dieses "navigateUp" - Meine Notes:
                 navigateUp = { navController.navigateUp() }
             )
         }
     ) { innerPadding ->
+        // toDO: (Rang 2)  verstehe dieses "uiState" - Mene Notes
         val uiState by viewModel.uiState.collectAsState()
 
         NavHost(
@@ -179,10 +185,12 @@ fun CupcakeApp(
 /**
  * Resets the [OrderUiState] and pops up to [CupcakeScreen.Start]
  */
+// Das hier ist einfach der links unten "Cancel" - Button, siehe: SelectOptionScreen
 private fun cancelOrderAndNavigateToStart(
     viewModel: OrderViewModel,
     navController: NavHostController
 ) {
+    // toDO: (Rang 2) Verstehen, warum das ein ResetORder ist.
     viewModel.resetOrder()
     navController.popBackStack(CupcakeScreen.Start.name, inclusive = false)
 }

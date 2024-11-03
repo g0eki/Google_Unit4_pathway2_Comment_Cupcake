@@ -19,6 +19,7 @@ package com.example.cupcake.data
  * Data class that represents the current UI state in terms of [quantity], [flavor],
  * [dateOptions], selected pickup [date] and [price]
  */
+// toDO: (Rang 3) verstehe noch mal den Vorteil / Nachteil von data class
 data class OrderUiState(
     /** Selected cupcake quantity (1, 6, 12) */
     val quantity: Int = 0,

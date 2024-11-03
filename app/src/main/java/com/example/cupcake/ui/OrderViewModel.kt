@@ -41,6 +41,13 @@ class OrderViewModel : ViewModel() {
     /**
      * Cupcake state for this order
      */
+    /*
+    // toDO: (Rang 2) verstehe dieses _uiState und uiState - meine Note
+     OrderUiState ist ein data class, siehe OrderUiState.kt, aber was ist:
+     - pickupOptions ist eine liste  und was ist pickupOptions() ? ==> siehe unten Zeile: 114
+     - asStateFlow ?
+     ####################################################################
+     */
     private val _uiState = MutableStateFlow(OrderUiState(pickupOptions = pickupOptions()))
     val uiState: StateFlow<OrderUiState> = _uiState.asStateFlow()
 
