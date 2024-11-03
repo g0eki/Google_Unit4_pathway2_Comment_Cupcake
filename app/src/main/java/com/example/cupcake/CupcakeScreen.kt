@@ -97,7 +97,9 @@ fun CupcakeApp(
     navController: NavHostController = rememberNavController()
 ) {
     // toDO: (Rang 1) verstehe dieses "backStackEntry" - Meine Notes:
-    // Get current back stack entry
+    // toDO: (Rang 3) verstehe dieses by nochmal, ich glaube es war dieses extra: Deligation ..
+    //      -- https://docs.google.com/document/d/16ynEMMuxBkdjEW6xZebMfbzNYeHGdzZRQqFH2wJ7hGI/edit?tab=t.sj8l5wsxodtv
+    // toDO: (Rang 3) verstehe dieses remember nochmal
     val backStackEntry by navController.currentBackStackEntryAsState()
     // toDO: (Rang 1) verstehe dieses "currentScreen" - Meine Notes: Whenn ein Ziel vorhanden gib das zurück, ansonsten Start.name
     // Get the name of the current screen
