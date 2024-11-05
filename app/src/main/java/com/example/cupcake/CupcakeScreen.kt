@@ -17,6 +17,7 @@ package com.example.cupcake
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -101,11 +102,20 @@ fun CupcakeApp(
     //      -- https://docs.google.com/document/d/16ynEMMuxBkdjEW6xZebMfbzNYeHGdzZRQqFH2wJ7hGI/edit?tab=t.sj8l5wsxodtv
     // toDO: (Rang 3) verstehe dieses remember nochmal
     val backStackEntry by navController.currentBackStackEntryAsState()
+    Log.i("INFO", "backStackEntry ==>")
+    Log.i("INFO", backStackEntry.toString())
+    Log.i("INFO", backStackEntry?.maxLifecycle.toString())
+    Log.i("INFO", backStackEntry?.arguments.toString())
+
     // toDO: (Rang 1) verstehe dieses "currentScreen" - Meine Notes: Whenn ein Ziel vorhanden gib das zurück, ansonsten Start.name
     // Get the name of the current screen
     val currentScreen = CupcakeScreen.valueOf(
         backStackEntry?.destination?.route ?: CupcakeScreen.Start.name
     )
+    Log.i("INFO", "currentScreen ==>")
+    Log.i("INFO", currentScreen.toString())
+    Log.i("INFO", currentScreen.name.toString())
+    Log.i("INFO", currentScreen.title.toString())
 
     Scaffold(
         topBar = {
@@ -115,8 +125,19 @@ fun CupcakeApp(
                 // NOTE: Doku: previousBackStackEntry - Return: den letzten sichtbaren Eintrag auf dem hinteren Stapel oder null, wenn der hintere Stapel weniger als zwei sichtbare Einträge hat
                 canNavigateBack = navController.previousBackStackEntry != null,
                 // toDO: (Rang 1) verstehe dieses "navigateUp" - Meine Notes:
-                navigateUp = { navController.navigateUp() }
+                // navigateUp = { navController.navigateUp() } //  navController.popBackStack(CupcakeScreen.Start.name, inclusive = false)
+                navigateUp = { navController.popBackStack(CupcakeScreen.Pickup.name, inclusive = false) } //  navController.popBackStack(CupcakeScreen.Start.name, inclusive = false)
+                /*
+                toDO: für Docs
+                * navController.popBackStack() == navController.navigateUp() - ohne Argumente von popBackStack
+                * - inclusive = false ==> Spring bis zu dir dieser Seite zurück: Was angegeben ist
+                *       - Falls im Stack vorhanden, sonst passiert nichts
+                * - inclusive = true ==> Spring bis zu dir dieser Seite zurück: Was angegeben ist, inklusive dieser Seite
+                *     - Falls im Stack vorhanden, passiert nichts
+                * - saveState Noch nicht ausgetestet
+                * */
             )
+            Log.i("info", "navController.popBackStack(CupcakeScreen.Flavor.name, inclusive = false)")
         }
     ) { innerPadding ->
         // toDO: (Rang 2)  verstehe dieses "uiState" - Mene Notes
