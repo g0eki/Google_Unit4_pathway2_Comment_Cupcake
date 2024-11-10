@@ -108,7 +108,7 @@ fun CupcakeApp(
     Log.i("INFO", backStackEntry?.maxLifecycle.toString())
     Log.i("INFO", backStackEntry?.arguments.toString())
 
-    // toDO: (Rang 1) verstehe dieses "currentScreen" - Meine Notes: Whenn ein Ziel vorhanden gib das zurück, ansonsten Start.name
+    // toDO: (Rang 1) verstehe dieses "currentScreen" - Meine Notes: Whenn ein Ziel vorhanden gib das zurÃ¼ck, ansonsten Start.name
     // Get the name of the current screen
     val currentScreen = CupcakeScreen.valueOf(
         backStackEntry?.destination?.route ?: CupcakeScreen.Start.name
@@ -129,7 +129,7 @@ fun CupcakeApp(
             CupcakeAppBar(
                 currentScreen = currentScreen,
                 // toDO: (Rang 1) verstehe dieses "previousBackStackEntry" - Meine Notes:
-                // NOTE: Doku: previousBackStackEntry - Return: den letzten sichtbaren Eintrag auf dem hinteren Stapel oder null, wenn der hintere Stapel weniger als zwei sichtbare Einträge hat
+                // NOTE: Doku: previousBackStackEntry - Return: den letzten sichtbaren Eintrag auf dem hinteren Stapel oder null, wenn der hintere Stapel weniger als zwei sichtbare EintrÃ¤ge hat
                 canNavigateBack = navController.previousBackStackEntry != null,
                 // toDO: (Rang 1) verstehe dieses "navigateUp" - Meine Notes:
                 navigateUp = { navController.navigateUp() }
@@ -139,9 +139,9 @@ fun CupcakeApp(
                 toDO: (Google Docs)
                 GK-Note:
                 * navController.popBackStack() == navController.navigateUp() - ohne Argumente von popBackStack
-                * - inclusive = false ==> Spring bis zu dir dieser Seite zurück: Was angegeben ist
+                * - inclusive = false ==> Spring bis zu dir dieser Seite zurÃ¼ck: Was angegeben ist
                 *       - Falls im Stack vorhanden, sonst passiert nichts
-                * - inclusive = true ==> Spring bis zu dir dieser Seite zurück: Was angegeben ist, inklusive dieser Seite
+                * - inclusive = true ==> Spring bis zu dir dieser Seite zurÃ¼ck: Was angegeben ist, inklusive dieser Seite
                 *     - Falls im Stack vorhanden, passiert nichts
                 * - saveState Noch nicht ausgetestet
                 * */
