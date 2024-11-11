@@ -97,32 +97,49 @@ fun CupcakeApp(
     viewModel: OrderViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ) {
+
+    /*
+    toDO: (Liste)
+    - (Rang 1)
+        # verstehe dieses "backStackEntry" - Meine Notes:
+    - (Rang 3)
+        # verstehe dieses by nochmal, ich glaube es war dieses extra: Deligation ..
+          -- https://docs.google.com/document/d/16ynEMMuxBkdjEW6xZebMfbzNYeHGdzZRQqFH2wJ7hGI/edit?tab=t.sj8l5wsxodtv
+        # verstehe dieses remember nochmal
+     */
+    /* ---------------------------------------------------------------- */
     // Get current back stack entry
-    // toDO: (Rang 1) verstehe dieses "backStackEntry" - Meine Notes:
-    // toDO: (Rang 3) verstehe dieses by nochmal, ich glaube es war dieses extra: Deligation ..
-    //      -- https://docs.google.com/document/d/16ynEMMuxBkdjEW6xZebMfbzNYeHGdzZRQqFH2wJ7hGI/edit?tab=t.sj8l5wsxodtv
-    // toDO: (Rang 3) verstehe dieses remember nochmal
     val backStackEntry by navController.currentBackStackEntryAsState()
+    /* ---------------------------------------------------------------- */
     Log.i("INFO", "backStackEntry ==>")
     Log.i("INFO", backStackEntry.toString())
     Log.i("INFO", backStackEntry?.maxLifecycle.toString())
     Log.i("INFO", backStackEntry?.arguments.toString())
 
-    // toDO: (Rang 1) verstehe dieses "currentScreen" - Meine Notes: Whenn ein Ziel vorhanden gib das zurück, ansonsten Start.name
+    /*
+    toDO:
+    - (Rang 1)
+        #  verstehe dieses "currentScreen" - Meine Notes: Whenn ein Ziel vorhanden gib das zurück, ansonsten Start.name
+    (Google Docs)
+        # GK-Note: "valueOf" ist Kotlin spezifisch
+            - The valueOf() method throws an IllegalArgumentException if the specified name does not match any of the enum constants defined in the class.
+            - Link: https://kotlinlang.org/docs/enum-classes.html#working-with-enum-constants
+     */
+    /* ---------------------------------------------------------------- */
     // Get the name of the current screen
     val currentScreen = CupcakeScreen.valueOf(
         backStackEntry?.destination?.route ?: CupcakeScreen.Start.name
     )
-    /*
-    toDO: (Google Docs)
-    GK-Note: "valueOf" ist Kotlin spezifisch
-    - The valueOf() method throws an IllegalArgumentException if the specified name does not match any of the enum constants defined in the class.
-    - Link: https://kotlinlang.org/docs/enum-classes.html#working-with-enum-constants
-     */
+    /* ---------------------------------------------------------------- */
     Log.i("INFO", "currentScreen ==>")
     Log.i("INFO", currentScreen.toString())
     Log.i("INFO", currentScreen.name.toString())
     Log.i("INFO", currentScreen.title.toString())
+
+    Log.i("INFO", "##################################")
+    Log.i("INFO", navController.previousBackStackEntry.toString())
+    Log.i("INFO", navController.previousBackStackEntry?.arguments.toString())
+
 
     Scaffold(
         topBar = {
