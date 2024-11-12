@@ -97,73 +97,25 @@ fun CupcakeApp(
     viewModel: OrderViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ) {
-
-    /*
-    toDO: (Liste)
-    - (Rang 1)
-        # verstehe dieses "backStackEntry" - Meine Notes:
-    - (Rang 3)
-        # verstehe dieses by nochmal, ich glaube es war dieses extra: Deligation ..
-          -- https://docs.google.com/document/d/16ynEMMuxBkdjEW6xZebMfbzNYeHGdzZRQqFH2wJ7hGI/edit?tab=t.sj8l5wsxodtv
-        # verstehe dieses remember nochmal
-     */
     /* ---------------------------------------------------------------- */
     // Get current back stack entry
     val backStackEntry by navController.currentBackStackEntryAsState()
     /* ---------------------------------------------------------------- */
-    Log.i("INFO", "backStackEntry ==>")
-    Log.i("INFO", backStackEntry.toString())
-    Log.i("INFO", backStackEntry?.maxLifecycle.toString())
-    Log.i("INFO", backStackEntry?.arguments.toString())
 
-    /*
-    toDO:
-    - (Rang 1)
-        #  verstehe dieses "currentScreen" - Meine Notes: Whenn ein Ziel vorhanden gib das zurück, ansonsten Start.name
-    (Google Docs)
-        # GK-Note: "valueOf" ist Kotlin spezifisch
-            - The valueOf() method throws an IllegalArgumentException if the specified name does not match any of the enum constants defined in the class.
-            - Link: https://kotlinlang.org/docs/enum-classes.html#working-with-enum-constants
-     */
     /* ---------------------------------------------------------------- */
     // Get the name of the current screen
     val currentScreen = CupcakeScreen.valueOf(
         backStackEntry?.destination?.route ?: CupcakeScreen.Start.name
     )
     /* ---------------------------------------------------------------- */
-    Log.i("INFO", "currentScreen ==>")
-    Log.i("INFO", currentScreen.toString())
-    Log.i("INFO", currentScreen.name.toString())
-    Log.i("INFO", currentScreen.title.toString())
-
-    Log.i("INFO", "##################################")
-    Log.i("INFO", navController.previousBackStackEntry.toString())
-    Log.i("INFO", navController.previousBackStackEntry?.arguments.toString())
-
 
     Scaffold(
         topBar = {
             CupcakeAppBar(
                 currentScreen = currentScreen,
-                // toDO: (Rang 1) verstehe dieses "previousBackStackEntry" - Meine Notes:
-                // NOTE: Doku: previousBackStackEntry - Return: den letzten sichtbaren Eintrag auf dem hinteren Stapel oder null, wenn der hintere Stapel weniger als zwei sichtbare Einträge hat
                 canNavigateBack = navController.previousBackStackEntry != null,
-                // toDO: (Rang 1) verstehe dieses "navigateUp" - Meine Notes:
                 navigateUp = { navController.navigateUp() }
-		        // navController.popBackStack(CupcakeScreen.Start.name, inclusive = false)
-                // navigateUp = { navController.popBackStack(CupcakeScreen.Pickup.name, inclusive = false) } //  navController.popBackStack(CupcakeScreen.Start.name, inclusive = false)
-                /*
-                toDO: (Google Docs)
-                GK-Note:
-                * navController.popBackStack() == navController.navigateUp() - ohne Argumente von popBackStack
-                * - inclusive = false ==> Spring bis zu dir dieser Seite zurück: Was angegeben ist
-                *       - Falls im Stack vorhanden, sonst passiert nichts
-                * - inclusive = true ==> Spring bis zu dir dieser Seite zurück: Was angegeben ist, inklusive dieser Seite
-                *     - Falls im Stack vorhanden, passiert nichts
-                * - saveState Noch nicht ausgetestet
-                * */
             )
-            Log.i("info", "navController.popBackStack(CupcakeScreen.Flavor.name, inclusive = false)")
         }
     ) { innerPadding ->
         // toDO: (Rang 2)  verstehe dieses "uiState" - Mene Notes
@@ -234,7 +186,6 @@ fun CupcakeApp(
 /**
  * Resets the [OrderUiState] and pops up to [CupcakeScreen.Start]
  */
-// Das hier ist einfach der links unten "Cancel" - Button, siehe: SelectOptionScreen
 private fun cancelOrderAndNavigateToStart(
     viewModel: OrderViewModel,
     navController: NavHostController
