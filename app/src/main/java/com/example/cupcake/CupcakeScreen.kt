@@ -118,7 +118,6 @@ fun CupcakeApp(
             )
         }
     ) { innerPadding ->
-        // toDO: (Rang 2)  verstehe dieses "uiState" - Mene Notes
         val uiState by viewModel.uiState.collectAsState()
 
         NavHost(
@@ -190,7 +189,6 @@ private fun cancelOrderAndNavigateToStart(
     viewModel: OrderViewModel,
     navController: NavHostController
 ) {
-    // toDO: (Rang 2) Verstehen, warum das ein ResetORder ist.
     viewModel.resetOrder()
     navController.popBackStack(CupcakeScreen.Start.name, inclusive = false)
 }
